@@ -8,6 +8,7 @@ import 'package:pokemon_flutter/presentation/modules/detail/widget/detail_widget
 import 'package:pokemon_flutter/presentation/theme/dimensions.dart';
 
 import '../../../widgets/loading_text_widget.dart';
+import 'detail_web_widget.dart';
 
 class DetailBodyWidget extends WidgetErrorHandlerComponent<DetailBloc,
     DetailState, ShowPokemonInfoState, ShowDetailErrorState> {
@@ -62,14 +63,22 @@ class DetailBodyWidget extends WidgetErrorHandlerComponent<DetailBloc,
   @override
   Widget buildOnInit(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+        ),
         body: Center(child: LoadingTextWidget(text: 'loading_info'.tr())));
   }
 
   @override
   Widget buildOnState(BuildContext context, ShowPokemonInfoState state) {
-    return DetailWidget(pokemonEntity: state.pokemonEntity);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 600) {
+          return DetailWidget(pokemonEntity: state.pokemonEntity);
+        }  else {
+          return DetailWebWidget(pokemonEntity: state.pokemonEntity);
+        }
+      },
+    );
   }
 }

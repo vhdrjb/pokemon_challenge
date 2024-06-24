@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class HeaderImageBackgroundClipper extends CustomClipper<Path> {
@@ -9,7 +11,7 @@ class HeaderImageBackgroundClipper extends CustomClipper<Path> {
     path.lineTo(size.width, 2 * size.height / 3);
     path.arcToPoint(
       Offset(0, 2 * size.height / 3),
-      radius: Radius.circular(size.height * 1.5),
+      radius: Radius.circular(size.height*1.5),
       clockwise: true,
     );
     return path;
@@ -17,6 +19,6 @@ class HeaderImageBackgroundClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
+    return true;
   }
 }
