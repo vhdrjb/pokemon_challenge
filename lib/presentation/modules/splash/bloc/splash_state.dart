@@ -7,11 +7,17 @@ abstract class SplashState {
 
 class SplashInitial extends SplashState {}
 
-
 class ShowVersionState extends SplashState {
   final String version;
 
   const ShowVersionState({
     required this.version,
   });
+}
+
+class NavigateToHomeState extends MoveState implements SplashState {
+  NavigateToHomeState()
+      : super(
+          path: Routes.home,
+        );
 }
