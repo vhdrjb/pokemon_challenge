@@ -11,8 +11,8 @@ abstract class NetworkModule {
   Dio provideDevDio(@Named('base_url') String baseUrl) {
     BaseOptions baseOptions = BaseOptions(
       baseUrl: baseUrl,
-      receiveTimeout: const Duration(seconds: 20),
-      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 10),
     );
 
     Dio dio = Dio(baseOptions);
@@ -24,8 +24,8 @@ abstract class NetworkModule {
   Dio provideDio(@Named('base_url') String baseUrl) {
     BaseOptions baseOptions = BaseOptions(
       baseUrl: baseUrl,
-      receiveTimeout: const Duration(seconds: 20),
-      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 5),
+      connectTimeout: const Duration(seconds: 5),
     );
 
     return Dio(baseOptions);

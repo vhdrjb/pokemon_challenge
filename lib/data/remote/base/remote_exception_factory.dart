@@ -14,6 +14,14 @@ class RemoteExceptionFactory {
         return RemoteException.badException(message: errorMessage);
       }
     }
+
+    if (error.type == DioExceptionType.sendTimeout ||
+        error.type == DioExceptionType.receiveTimeout ||
+        error.type == DioExceptionType.connectionTimeout ||
+        error.type == DioExceptionType.connectionError) {
+      return NetworkConnectionException();
+    }
+
     return UnknownNetworkException();
   }
 }

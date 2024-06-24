@@ -2,7 +2,11 @@ import 'package:equatable/equatable.dart';
 
 abstract class PokemonModel {}
 
-class PokemonLoadingModel extends PokemonModel {}
+class PokemonLoadingModel extends Equatable implements PokemonModel {
+  @override
+  List<Object?> get props => [true];
+
+}
 
 class PokemonDataModel extends Equatable implements PokemonModel {
   final String name;

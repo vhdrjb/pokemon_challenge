@@ -4,6 +4,8 @@ import 'package:pokemon_flutter/presentation/base/screen/base_stateful_screen.da
 import 'package:pokemon_flutter/presentation/modules/splash/bloc/splash_bloc.dart';
 import 'package:pokemon_flutter/presentation/modules/splash/widget/splash_body.dart';
 
+import '../detail/widget/header_image_background_clipper.dart';
+
 class SplashScreen extends BaseStatefulScreen<SplashBloc> {
   const SplashScreen({super.key});
 
@@ -12,7 +14,6 @@ class SplashScreen extends BaseStatefulScreen<SplashBloc> {
 }
 
 class _SplashScreenState extends ScreenState<SplashBloc> {
-
   @override
   void initState() {
     super.initState();

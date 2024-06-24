@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_flutter/presentation/extensions/context_extensions.dart';
 import 'package:shimmer/shimmer.dart';
 
-class PokemonLoadingWidget extends StatelessWidget {
-  const PokemonLoadingWidget({super.key});
+class LoadingTextWidget extends StatelessWidget {
+  final String text;
+
+  const LoadingTextWidget({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Shimmer(
-      direction: ShimmerDirection.ltr,
+        direction: ShimmerDirection.ltr,
         period: const Duration(seconds: 5),
         gradient: LinearGradient(
             begin: Alignment.centerLeft,
@@ -19,8 +21,8 @@ class PokemonLoadingWidget extends StatelessWidget {
               context.colorScheme.loadingEndColor,
             ]),
         child: Text(
-          'loading',
+          text,
           style: context.textTheme.bodyLarge,
-        ).tr());
+        ));
   }
 }
