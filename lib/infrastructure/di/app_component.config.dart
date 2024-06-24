@@ -23,16 +23,18 @@ import '../../data/repository/pokemon/pokemon_datasource.dart' as _i10;
 import '../../data/repository/pokemon/pokemon_repository.dart' as _i13;
 import '../../domain/configuration/get/get_current_configuration_use_case.dart'
     as _i9;
-import '../../domain/domain.dart' as _i16;
+import '../../domain/domain.dart' as _i17;
+import '../../domain/pokemon/detail/get_pokemon_detail_use_case.dart' as _i15;
 import '../../domain/pokemon/list/get_pokemon_list_usecase.dart' as _i14;
 import '../../presentation/modules/global/global_bloc.dart' as _i12;
-import '../routing/app_router.dart' as _i18;
-import '../routing/provider/home_route_provider.dart' as _i15;
+import '../routing/app_router.dart' as _i20;
+import '../routing/provider/detail_route_provider.dart' as _i16;
+import '../routing/provider/home_route_provider.dart' as _i18;
 import '../routing/provider/splash_route_provider.dart' as _i4;
-import '../routing/route_factory.dart' as _i17;
-import 'data_module.dart' as _i19;
-import 'network_module.dart' as _i20;
-import 'presentation_module.dart' as _i21;
+import '../routing/route_factory.dart' as _i19;
+import 'data_module.dart' as _i21;
+import 'network_module.dart' as _i22;
+import 'presentation_module.dart' as _i23;
 
 const String _prod = 'prod';
 const String _dev = 'dev';
@@ -96,20 +98,25 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i13.PokemonRepository(datasource: gh<_i10.PokemonDatasource>()));
     gh.factory<_i14.GetPokemonListUsecase>(() =>
         _i14.GetPokemonListUsecase(repository: gh<_i13.PokemonRepository>()));
-    gh.factory<_i15.HomeRouteProvider>(() => _i15.HomeRouteProvider(
-        getPokemonListUsecase: gh<_i16.GetPokemonListUsecase>()));
-    gh.lazySingleton<_i17.RouteFactory>(() => _i17.RouteFactory(
+    gh.factory<_i15.GetPokemonDetailUseCase>(() =>
+        _i15.GetPokemonDetailUseCase(repository: gh<_i13.PokemonRepository>()));
+    gh.factory<_i16.DetailRouteProvider>(() => _i16.DetailRouteProvider(
+        getPokemonDetailUseCase: gh<_i17.GetPokemonDetailUseCase>()));
+    gh.factory<_i18.HomeRouteProvider>(() => _i18.HomeRouteProvider(
+        getPokemonListUsecase: gh<_i17.GetPokemonListUsecase>()));
+    gh.lazySingleton<_i19.RouteFactory>(() => _i19.RouteFactory(
           splashRouteProvider: gh<_i4.SplashRouteProvider>(),
-          homeRouteProvider: gh<_i15.HomeRouteProvider>(),
+          homeRouteProvider: gh<_i18.HomeRouteProvider>(),
+          detailRouteProvider: gh<_i16.DetailRouteProvider>(),
         ));
-    gh.lazySingleton<_i18.AppRouter>(
-        () => _i18.AppRouter(routeFactory: gh<_i17.RouteFactory>()));
+    gh.lazySingleton<_i20.AppRouter>(
+        () => _i20.AppRouter(routeFactory: gh<_i19.RouteFactory>()));
     return this;
   }
 }
 
-class _$DataModule extends _i19.DataModule {}
+class _$DataModule extends _i21.DataModule {}
 
-class _$NetworkModule extends _i20.NetworkModule {}
+class _$NetworkModule extends _i22.NetworkModule {}
 
-class _$PresentationModule extends _i21.PresentationModule {}
+class _$PresentationModule extends _i23.PresentationModule {}

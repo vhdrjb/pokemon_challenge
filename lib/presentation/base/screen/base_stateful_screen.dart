@@ -61,13 +61,13 @@ abstract class ScreenState<B extends BaseBloc>
   }
 
   void _replace(ReplaceState state) {
-    context.push(
+    context.go(
         Uri(path: state.path, queryParameters: state.queries).toString(),
         extra: state.extra);
   }
 
   void _navigate(MoveState state) {
-    context.go(Uri(path: state.path, queryParameters: state.queries).toString(),
+    context.push(Uri(path: state.path, queryParameters: state.queries).toString(),
         extra: state.extra);
   }
 

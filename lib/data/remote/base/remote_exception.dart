@@ -6,8 +6,13 @@ class RemoteException extends AppException {
 
   RemoteException.notFound() : super('not found');
   RemoteException.badException({String? message}) : super(message ?? 'unknown error');
+
 }
 
 class UnknownNetworkException extends RemoteException {
   UnknownNetworkException() : super.unknownNetworkException();
+}
+
+class NetworkConnectionException extends RemoteException {
+  NetworkConnectionException():super.unknownNetworkException();
 }

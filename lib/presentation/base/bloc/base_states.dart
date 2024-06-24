@@ -13,8 +13,7 @@ class MoveState extends ListenableStates {
 }
 
 class ReplaceState extends MoveState {
-  ReplaceState(
-      {required super.path, required super.queries, required super.extra});
+  ReplaceState({required super.path, super.queries, super.extra});
 }
 
 class ReturnState extends ListenableStates {

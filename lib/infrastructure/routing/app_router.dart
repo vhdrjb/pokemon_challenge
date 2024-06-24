@@ -16,9 +16,7 @@ class AppRouter {
   GoRouter generateRouter() {
     final GoRouter goRouter;
     if (_goRouter == null) {
-      goRouter = GoRouter(
-          debugLogDiagnostics: true,
-          routes: [
+      goRouter = GoRouter(debugLogDiagnostics: true, routes: [
         GoRoute(
           path: Routes.splash,
           builder: (context, state) =>
@@ -26,6 +24,11 @@ class AppRouter {
         ),
         GoRoute(
           path: Routes.home,
+          builder: (context, state) =>
+              routeFactory.generateRoute(context, state),
+        ),
+        GoRoute(
+          path: Routes.detail,
           builder: (context, state) =>
               routeFactory.generateRoute(context, state),
         )

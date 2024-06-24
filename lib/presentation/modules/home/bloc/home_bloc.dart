@@ -8,7 +8,10 @@ import 'package:pokemon_flutter/domain/base/usecase_result.dart';
 import 'package:pokemon_flutter/domain/domain.dart';
 import 'package:pokemon_flutter/domain/pokemon/list/get_pokemon_list_usecase.dart';
 import 'package:pokemon_flutter/presentation/base/bloc/base_bloc.dart';
+import 'package:pokemon_flutter/presentation/base/bloc/base_states.dart';
+import 'package:pokemon_flutter/presentation/presentation.dart';
 
+import '../../../exceptions/exception_message_factory.dart';
 import '../model/pokemon_model.dart';
 import 'home_bloc_data.dart';
 
@@ -27,6 +30,13 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     on<GetPokemonListEvent>(
       (event, emit) async {
         await _getPokemonList(emit);
+      },
+    );
+    on<ShowPokemonDetailEvent>(
+      (event, emit) {
+        if (event.id.isNotEmpty) {
+          emit(NavigateToDetailsState(id: event.id));
+        }
       },
     );
   }
@@ -60,7 +70,15 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
               _blocData = _blocData.copyWith(data: entities, loading: false);
             },
             onError: (error) {
-              emit(ShowErrorState(error: error.toString()));
+              _blocData = _blocData.copyWith(loading: false);
+              // if (_blocData.data.isNotEmpty) {
+                emit(ShowErrorPopupState(
+                    message:
+                        ExceptionMessageFactory.instance.getMessage(error)));
+              // } else {
+              //   emit(ShowErrorState(
+              //       error: ExceptionMessageFactory.instance.getMessage(error)));
+              // }
             },
           ));
     }

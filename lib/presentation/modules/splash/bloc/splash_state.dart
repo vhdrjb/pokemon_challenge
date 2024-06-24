@@ -15,7 +15,7 @@ class ShowVersionState extends SplashState {
   });
 }
 
-class NavigateToHomeState extends MoveState implements SplashState {
+class NavigateToHomeState extends ReplaceState implements SplashState {
   NavigateToHomeState()
       : super(
           path: Routes.home,

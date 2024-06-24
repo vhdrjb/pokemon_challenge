@@ -22,3 +22,15 @@ class ShowErrorState extends HomeState {
     required this.error,
   });
 }
+
+class NavigateToDetailsState extends MoveState implements HomeState {
+  NavigateToDetailsState({required String id}) : super(path: Routes.detailsPath(id));
+}
+
+class ShowErrorPopupState extends HomeState implements ListenableStates {
+  final String message;
+
+  const ShowErrorPopupState({
+    required this.message,
+  });
+}

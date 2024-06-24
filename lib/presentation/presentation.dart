@@ -11,3 +11,7 @@ export 'modules/splash/splash_screen.dart';
 export 'modules/home/bloc/home_bloc.dart';
 export 'modules/home/home_screen.dart';
 
+
+// detail
+export 'modules/detail/bloc/detail_bloc.dart';
+export 'modules/detail/detail_screen.dart';

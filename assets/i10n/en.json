@@ -1,3 +1,10 @@
 {
-  "loading": "Loading pokemon list"
+  "loading": "Loading pokemon list",
+  "loading_more": "Loading Pokemon",
+  "loading_info": "Loading Pokemon info",
+  "try_again": "Try again",
+  "return": "Back to list",
+  "network_error": "Error while accessing the server. Please check your network connections",
+  "height": "Height",
+  "weight": "Weight"
 }

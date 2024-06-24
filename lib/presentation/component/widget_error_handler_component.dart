@@ -34,6 +34,6 @@ abstract class WidgetErrorHandlerComponent<B extends BlocBase<
   Widget buildOnInit(BuildContext context);
 
   bool shouldRebuild(previous, current) {
-    return current.runtimeType == C;
+    return current.runtimeType == C || current.runtimeType  == E;
   }
 }
