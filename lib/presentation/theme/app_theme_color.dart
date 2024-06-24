@@ -28,6 +28,11 @@ abstract class AppThemeColor extends ColorScheme {
 
   Color get splashStartColor;
   Color get splashEndColor;
+  Color get errorColor;
+  Color get loadingColor;
+  Color get loadingStartColor;
+  Color get loadingEndColor;
+  Color get dividerColor;
 
 }
 
@@ -45,6 +50,21 @@ class _LightAppThemeColor extends AppThemeColor {
 
   @override
   Color get splashStartColor => const Color(0xff1fd349);
+
+  @override
+  Color get errorColor => const Color(0xff940820);
+
+  @override
+  Color get loadingColor => const Color(0xff10864b);
+
+  @override
+  Color get loadingEndColor => const Color(0xff07381b);
+
+  @override
+  Color get loadingStartColor => const Color(0xffd6e1cf);
+
+  @override
+  Color get dividerColor => const Color(0xff4d4d50);
 }
 
 class _DarkAppThemeColor extends AppThemeColor {
@@ -61,4 +81,19 @@ class _DarkAppThemeColor extends AppThemeColor {
 
   @override
   Color get splashStartColor => const Color(0xff245d07);
+
+  @override
+  Color get errorColor => const Color(0xfff14d64);
+
+  @override
+  Color get loadingColor => const Color(0xff37e38c);
+
+  @override
+  Color get loadingEndColor => const Color(0xff369f59);
+
+  @override
+  Color get loadingStartColor => const Color(0xff8bd797);
+
+  @override
+  Color get dividerColor => const Color(0xffa9a9a9);
 }

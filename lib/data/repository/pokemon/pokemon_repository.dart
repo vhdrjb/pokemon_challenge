@@ -1,0 +1,20 @@
+import 'package:injectable/injectable.dart';
+import 'package:pokemon_flutter/data/base/repository.dart';
+import 'package:pokemon_flutter/data/repository/pokemon/pokemon_datasource.dart';
+import 'package:pokemon_flutter/domain/base/page_wrapper.dart';
+
+import '../../../domain/pokemon/pokemon_entity.dart';
+import 'mapper/pokemon_list_entity_mapper.dart';
+
+@injectable
+class PokemonRepository implements Repository{
+  final PokemonDatasource _datasource;
+  final PokemonListEntityMapper _pokemonListMapper =  const PokemonListEntityMapper();
+  const PokemonRepository({
+    required PokemonDatasource datasource,
+  }) : _datasource = datasource;
+
+  Future<PageWrapper<PokemonEntity>> findAll(int page,int pageSize) {
+    return _datasource.getPokemonList(page, pageSize).then(_pokemonListMapper.map);
+  }
+}

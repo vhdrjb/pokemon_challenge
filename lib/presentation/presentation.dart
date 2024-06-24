@@ -7,3 +7,7 @@ export 'base/bloc/base_bloc.dart';
 export 'modules/splash/bloc/splash_bloc.dart';
 export 'modules/splash/splash_screen.dart';
 
+// home
+export 'modules/home/bloc/home_bloc.dart';
+export 'modules/home/home_screen.dart';
+
