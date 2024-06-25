@@ -50,9 +50,6 @@ To use the Docker image for the web version from the latest release:
 
 This repository uses GitHub Actions to automate the build and release process for both the APK and web versions. The workflow is triggered on every push to tags that match the pattern `v*`.
 
-### Workflow Badge
-
-![Build and Release](https://github.com/vhdrjb/pokemon_challenge/actions/workflows/release.yml/badge.svg)
 
 ### Workflow Details
 
