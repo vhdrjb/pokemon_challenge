@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
-          java-version: '11'
+          java-version: '17'
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -29,6 +29,9 @@ jobs:
 
       - name: Flutter Pub Get
         run: flutter pub get
+
+      - name: Flutter Tests
+        run: flutter test
 
       - name: Build APK
         run: flutter build apk --release
