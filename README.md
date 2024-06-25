@@ -1,6 +1,6 @@
 # My Flutter Project
 
-![Build and Release](https://github.com/vhdrjb/pokemon_challenge/actions/workflows/release.yml/badge.svg)
+![Release workflow](https://github.com/vhdrjb/pokemon_challenge/actions/workflows/release.yaml/badge.svg)
 
 This project is a Flutter application that builds both an APK for Android and a web version that can be served using Docker with Nginx.
 
