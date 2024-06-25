@@ -1,0 +1,100 @@
+name: Build and Release APK and Web
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - feature/cicd
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.22.2
+
+      - name: Flutter Pub Get
+        run: flutter pub get
+
+      - name: Flutter Tests
+        run: flutter test
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Build Web
+        run: flutter build web --release
+
+      - name: Call Docker Web Workflow
+        uses: ./.github/actions/docker_web_release
+        with:
+          web_build_path: build/web
+
+      - name: Download Web Package Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: web-release
+          path: release_files
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload Web Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-web
+          path: release_files/web_release.zip
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload APK to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/app/outputs/flutter-apk/app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
+
+      - name: Upload Web Package to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: release_files/web_release.zip
+          asset_name: web_release.zip
+          asset_content_type: application/zip
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  packages: none

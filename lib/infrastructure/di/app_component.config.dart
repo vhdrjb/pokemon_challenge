@@ -24,8 +24,8 @@ import '../../data/repository/pokemon/pokemon_repository.dart' as _i13;
 import '../../domain/configuration/get/get_current_configuration_use_case.dart'
     as _i9;
 import '../../domain/domain.dart' as _i17;
-import '../../domain/pokemon/detail/get_pokemon_detail_use_case.dart' as _i15;
-import '../../domain/pokemon/list/get_pokemon_list_usecase.dart' as _i14;
+import '../../domain/pokemon/detail/get_pokemon_detail_use_case.dart' as _i14;
+import '../../domain/pokemon/list/get_pokemon_list_usecase.dart' as _i15;
 import '../../presentation/modules/global/global_bloc.dart' as _i12;
 import '../routing/app_router.dart' as _i20;
 import '../routing/provider/detail_route_provider.dart' as _i16;
@@ -96,10 +96,10 @@ extension GetItInjectableX on _i1.GetIt {
         .provideGlobalBloc(gh<_i9.GetCurrentConfigurationUseCase>()));
     gh.factory<_i13.PokemonRepository>(
         () => _i13.PokemonRepository(datasource: gh<_i10.PokemonDatasource>()));
-    gh.factory<_i14.GetPokemonListUsecase>(() =>
-        _i14.GetPokemonListUsecase(repository: gh<_i13.PokemonRepository>()));
-    gh.factory<_i15.GetPokemonDetailUseCase>(() =>
-        _i15.GetPokemonDetailUseCase(repository: gh<_i13.PokemonRepository>()));
+    gh.factory<_i14.GetPokemonDetailUseCase>(() =>
+        _i14.GetPokemonDetailUseCase(repository: gh<_i13.PokemonRepository>()));
+    gh.factory<_i15.GetPokemonListUsecase>(() =>
+        _i15.GetPokemonListUsecase(repository: gh<_i13.PokemonRepository>()));
     gh.factory<_i16.DetailRouteProvider>(() => _i16.DetailRouteProvider(
         getPokemonDetailUseCase: gh<_i17.GetPokemonDetailUseCase>()));
     gh.factory<_i18.HomeRouteProvider>(() => _i18.HomeRouteProvider(
