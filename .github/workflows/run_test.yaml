@@ -24,5 +24,12 @@ jobs:
       - run: flutter test
 
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  packages: none
+
+
 
 

@@ -1,0 +1,54 @@
+name: Build docker for flutter web
+
+on:
+  workflow_call:
+    inputs:
+      web_build_path:
+        description: 'The path to the Flutter web build directory'
+        required: true
+        type: string
+
+jobs:
+  build_docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create Dockerfile
+        run: |
+          echo 'FROM nginx:alpine' > Dockerfile
+          echo 'COPY ${{ inputs.web_build_path }} /usr/share/nginx/html' >> Dockerfile
+          echo 'COPY nginx.conf /etc/nginx/nginx.conf' >> Dockerfile
+          echo 'EXPOSE 80' >> Dockerfile
+          echo 'CMD ["nginx", "-g", "daemon off;"]' >> Dockerfile
+
+      - name: Create nginx.conf
+        run: |
+          echo 'server {' > nginx.conf
+          echo '    listen 80;' >> nginx.conf
+          echo '    server_name localhost;' >> nginx.conf
+          echo '    location / {' >> nginx.conf
+          echo '        try_files \$uri \$uri/ /index.html;' >> nginx.conf
+          echo '    }' >> nginx.conf
+          echo '    error_page 500 502 503 504 /50x.html;' >> nginx.conf
+          echo '    location = /50x.html {' >> nginx.conf
+          echo '        root /usr/share/nginx/html;' >> nginx.conf
+          echo '    }' >> nginx.conf
+          echo '}' >> nginx.conf
+
+      - name: Package Web and Config Files
+        run: |
+          mkdir release_files
+          cp -r ${{ inputs.web_build_path }} release_files/web
+          cp Dockerfile release_files/
+          cp nginx.conf release_files/
+          cd release_files
+          zip -r web_release.zip .
+
+      - name: Upload Web Package Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-release
+          path: release_files/web_release.zip
