@@ -2,7 +2,7 @@
 
 ![Release workflow](https://github.com/vhdrjb/pokemon_challenge/actions/workflows/release.yaml/badge.svg)
 
-![Test workflow](https://github.com/vhdrjb/pokemon_challenge/actions/workflows/ci.yaml/badge.svg)
+![Test workflow](https://github.com/vhdrjb/pokemon_challenge/actions/workflows/run_test.yaml/badge.svg)
 
 This project is a Flutter application that builds both an APK for Android and a web version that can be served using Docker with Nginx.
 
